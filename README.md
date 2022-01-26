@@ -11,4 +11,5 @@ python3 gameRunner.py
 ```
 
 To play, enter your 5-letter guess when prompted, then hit enter.
-	
+
+Letters highlighted in green are in the correct position. Letters highlighted in yellow are contained in the word, but in the wrong posiiton. Letters highlighted in black do not exist in the word.	
