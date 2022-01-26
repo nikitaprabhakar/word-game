@@ -50,23 +50,39 @@ with open('words.csv') as file:
         chosenEntryNumber = random.randint(0, len(wordsDict)-1)
         answer = wordsDict[chosenEntryNumber]
 
-        print("actual answer" , answer)
+        print("actual answer", answer)
 
         #Setup Game
         guesses = dict()
         numAllowedGuesses = 6
-        
+        hasWon = False
         print('''
         Welcome to The Guessing Game
         ---------------------------
+
 
         ''')
         
         for i in range(1, numAllowedGuesses + 1):
             print("Guess ", i)
-            guess = str(input("Enter your guess:"))
+            guess = str(input("Enter your guess: \n"))
             guesses[i] = guess
             result = evaluateGuess(answer[0], guess)
+            listValues = result.values()
+            if all(element == 'green' for element in listValues):
+                hasWon = True
+                print('''
+                You won !!
+                The answer was:
+                ''', answer[0])
+                break
             print("Result for guess: ", guess)
-            print(result)
+            print(result, "\n")
+
+        if hasWon == False:
+            print('''
+            Sorry, you lost.
+            The answer was:
+            ''', answer[0])
+
 
