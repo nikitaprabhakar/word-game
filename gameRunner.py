@@ -35,7 +35,23 @@ def evaluateGuess(answer, guess, wordsDict):
      
         return evaluatedGuess 
      
+def formatResult(result, guess):
+    greenFormat = '\x1b[7;32;47m'
+    formatEnd = '\x1b[0m'
+    yellowFormat = '\x1b[1;37;43m'
+    blackFormat = '\x1b[1;37;40m'
 
+    formattedResult = ""
+
+    for i in range(0,5):
+        if result[i] == 'green':
+            formattedResult = formattedResult + greenFormat + guess[i] + formatEnd
+        elif result[i] == 'yellow':
+            formattedResult = formattedResult + yellowFormat + guess[i]  + formatEnd
+        elif result[i] == 'black':
+            formattedResult = formattedResult + blackFormat + guess[i] + formatEnd
+
+    return formattedResult
 
 with open('words.csv') as file:
 
@@ -52,7 +68,7 @@ with open('words.csv') as file:
         chosenEntryNumber = random.randint(0, len(wordsDict)-1)
         answer = wordsDict[chosenEntryNumber]
 
-        print("actual answer", answer)
+        #print("actual answer", answer)
 
         #Setup Game
         guesses = dict()
@@ -86,7 +102,11 @@ with open('words.csv') as file:
                 ''', answer)
                 break
             print("Result for guess: ", guess)
-            print(result, "\n")
+            formattedResult = formatResult(result, guess)
+            print(formattedResult)
+            print('''
+            ---------------------------
+            ''')
 
         if hasWon == False:
             print('''
